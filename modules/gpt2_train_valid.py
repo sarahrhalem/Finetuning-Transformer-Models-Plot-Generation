@@ -2,7 +2,7 @@ import torch
 import time
 import torch.nn as nn
 from tqdm.notebook import tqdm
-from modules.utils import set_seed, format_time
+from modules.utils import set_seed, format_time, save_checkpoint
 
 
 # Training and validation method to fine-tune the model on the Netflix plot dataset
@@ -110,7 +110,7 @@ def gpt2_train_val(model, dataloaders, tokenizer, starting_epoch, optimizer, sch
 
         # Record results to dictionary to return
         performance_history = {'train_loss': train_loss_history, 'val_loss': val_loss_history,
-                               'train_perplexity': train_perplexity_history, 'val_perplexity': val_perplexity_history}
+                               'train_perplexity': train_perplexity_history, 'val_perplexity': val_perplexity_history, 'num_epochs': epochs}
 
         # Save model checkpoint at end of train_val run, also saves performance history
         if epoch == epochs - 1:
@@ -121,7 +121,7 @@ def gpt2_train_val(model, dataloaders, tokenizer, starting_epoch, optimizer, sch
                 'performance_history': performance_history,
                 'epoch': epoch + 1,
             }
-        # save_checkpoint(checkpoint, f"./checkpoint_{checkpoint['epoch']}.pth.tar")
+            save_checkpoint(checkpoint, f"./checkpoint_{checkpoint['epoch']}.pth.tar")
         print("")
         print("Training Finished")
 

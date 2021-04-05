@@ -3,7 +3,7 @@ import numpy as np
 import time
 import torch.nn as nn
 from tqdm.notebook import tqdm
-from modules.utils import set_seed, format_time
+from modules.utils import set_seed, format_time, save_checkpoint
 
 
 # Training/Validation method
@@ -127,7 +127,7 @@ def bert_train_val(model, dataloaders, starting_epoch, optimizer, scheduler, epo
 
         # Record results to dictionary to return
         performance_history = {'train_loss': train_loss_history, 'val_loss': val_loss_history,
-                               'train_accuracy': train_acc_history, 'val_accuracy': val_acc_history}
+                               'train_accuracy': train_acc_history, 'val_accuracy': val_acc_history, 'num_epochs': epochs}
 
         # Save model checkpoint at end of train_val run, also saves performance history
         if epoch == epochs - 1:
@@ -138,7 +138,7 @@ def bert_train_val(model, dataloaders, starting_epoch, optimizer, scheduler, epo
                 'performance_history': performance_history,
                 'epoch': epoch + 1,
             }
-        # save_checkpoint(checkpoint, f"./checkpoint_{checkpoint['epoch']}.pth.tar")
+            save_checkpoint(checkpoint, f"./BERTcheckpoint_{checkpoint['epoch']}.pth.tar")
         print("")
         print("Training Finished")
 

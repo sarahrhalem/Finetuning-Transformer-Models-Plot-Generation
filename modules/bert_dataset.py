@@ -1,5 +1,6 @@
 import torch
 from torch.utils.data import Dataset
+from nltk.corpus import stopwords
 
 
 class BertDataset(Dataset):
@@ -11,6 +12,7 @@ class BertDataset(Dataset):
         for plot in movie_plots:
             encode_dict = tokenizer.encode_plus(
                 plot,
+                add_special_tokens= True,
                 max_length=blocksize,
                 padding='max_length',
                 truncation=True,
@@ -25,3 +27,5 @@ class BertDataset(Dataset):
 
     def __getitem__(self, i):
         return self.input_ids[i], self.attention_masks[i], self.labels[i]
+
+###########

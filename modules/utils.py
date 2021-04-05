@@ -170,7 +170,7 @@ def plot_train_val_accuracy(history, title):
     plt.plot(epoch_count, (history['train_accuracy']), label='Train accuracy')
     plt.plot(epoch_count, (history['val_accuracy']), label='Validation accuracy')
     plt.xticks(epoch_count)
-    plt.ylim(0, 12)
+    plt.ylim(0,1)
     plt.xlabel("epochs")
     plt.ylabel("accuracy")
     plt.title(title)
@@ -181,22 +181,24 @@ def plot_train_val_accuracy(history, title):
 
 # Methods to save results and save plot samples to csv
 
-def save_test_results(results, filename):
-    test_performance = results[0]
+
+
+def save_results(results, filename):
+    performance = results
     with open(filename, 'wb') as handle:
-        pickle.dump(test_performance, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        pickle.dump(performance, handle, protocol=pickle.HIGHEST_PROTOCOL)
     return
 
 
-def load_test_results(filename):
+def load_results(filename):
     with open(filename, 'rb') as handle:
-        test_performance = pickle.load(handle)
-    return test_performance
+        performance = pickle.load(handle)
+    return performance
 
 
 def plot_samples_csv(generated_plots, plot_samples_path):
     input_list = zip(generated_plots)
-    with open(plot_samples_path, "w", newline="") as myfile:
+    with open(plot_samples_path, "w", newline="", encoding="utf-8") as myfile:
         write = csv.writer(myfile, quoting=csv.QUOTE_ALL)
         for row in input_list:
             write.writerow(row)
