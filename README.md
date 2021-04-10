@@ -10,6 +10,10 @@ All packages and the versions required to run are detailed in the main notebook.
 --pip install transformers
 --pip install bertviz
 
+Model checkpoint one-drive location:
+https://cityuni-my.sharepoint.com/:f:/g/personal/sarah_rhalem_city_ac_uk/Ekc0pwywzSlKucWxQr4Br-QB_j3NeZJ9JPm5CsKKDO1TpA?e=OeOx6z
+
+
 All modules are contained with the modules folder.
 Results are stored as pickle files in the Results folder.
 Figures used for the report are stored in the Figures folder.
